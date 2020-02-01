@@ -802,15 +802,58 @@ function Player:onLoseExperience(exp)
 	return exp
 end
 
+skillStages = {}
+meleeStages = {{0,18},{55,16},{65,14},{75,12},{85,10},{95,8},{105,6},{115,5},{125,4},{135,2}}
+magicLevelStages = {{0,9},{45,8},{55,7},{65,6},{75,5},{85,4},{95,3},{105,2.5},{115,2},{125,2}}
+skillStages[SKILL_FIST] = meleeStages
+skillStages[SKILL_CLUB] = meleeStages
+skillStages[SKILL_SWORD] = meleeStages
+skillStages[SKILL_AXE] = meleeStages
+skillStages[SKILL_DISTANCE] = meleeStages
+skillStages[SKILL_SHIELD] = meleeStages
+skillStages[SKILL_FISHING] = {{0,5},{60,4},{80,3},{100,2},{110,1}}
+skillStages[SKILL_MAGLEVEL] = magicLevelStages
+   
 function Player:onGainSkillTries(skill, tries)
-	if APPLY_SKILL_MULTIPLIER == false then
-		return tries
-	end
+    if APPLY_SKILL_MULTIPLIER == false then
+        return tries
+    end
+   
+	local skillName
+	local skillRate
 
-	if skill == SKILL_MAGLEVEL then
-		return tries * configManager.getNumber(configKeys.RATE_MAGIC)
+    if(skill == 0) then
+        skillName = SKILL_FIST
+    elseif (skill == 1) then
+        skillName = SKILL_CLUB
+    elseif (skill == 2) then
+        skillName = SKILL_SWORD
+    elseif (skill == 3) then
+        skillName = SKILL_AXE
+    elseif (skill == 4) then
+        skillName = SKILL_DISTANCE
+    elseif (skill == 5) then
+        skillName = SKILL_SHIELD
+    elseif (skill == 6) then
+        skillName = FISHING
 	end
-	return tries * configManager.getNumber(configKeys.RATE_SKILL)
+	
+	if(skillStages[skill] ~= nil) then
+        skillRate = 1
+        for i, skillRateInfo in pairs(skillStages[skill]) do
+            if(getPlayerSkill(self, skillName) >= skillRateInfo[1]) then
+                skillRate = skillRateInfo[2]
+            else
+                break
+            end
+		end
+    end
+   
+    if skill == SKILL_MAGLEVEL then
+        return tries * configManager.getNumber(configKeys.RATE_MAGIC) * skillRate
+	end
+	
+    return tries * configManager.getNumber(configKeys.RATE_SKILL) * skillRate
 end
 
 function Player:onRemoveCount(item)

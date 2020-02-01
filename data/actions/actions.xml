@@ -21,6 +21,9 @@
 	<action itemid="24181" pos="32240;32179;8" script="arena pvp/arena10x10.lua"/>
 	<action itemid="24173" pos="32271;32180;8" script="arena pvp/arena2x2.lua"/>
 
+	<!-- Autoloot mode 2 -->
+	<action actionid="500" script="autoloot/autoloot.lua" />
+
 	<!-- Barbarian Test Quest -->
 	<action fromid="7174" toid="7176" script="quests/barbarian test/horn.lua" />
 	<action fromid="7140" toid="7141" script="quests/barbarian test/horn.lua" />
@@ -1149,6 +1152,11 @@
 	<action itemid="25419" script="valuables/randomitems.lua" />
 	<action itemid="26165" script="valuables/randomitems.lua" />
 	<action itemid="32014" script="valuables/randomitems.lua" />
+
+	<!-- New Custom -->
+	<action itemid="2148" script="others/ChangeGold.lua"/>
+	<action itemid="2152" script="others/ChangeGold.lua"/>
+	<action itemid="2160" script="others/ChangeGold.lua"/>
 </actions>
 
 <!--

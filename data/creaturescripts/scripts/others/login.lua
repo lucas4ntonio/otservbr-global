@@ -36,7 +36,66 @@ function onLogin(player)
 		loginStr = string.format('Your last visit was on %s.', os.date('%a %b %d %X %Y', player:getLastLoginSaved()))
 	end
 
-    player:sendTextMessage(MESSAGE_STATUS_DEFAULT, loginStr)
+	--In Service of Yalahar 
+	player:setStorageValue(Storage.InServiceofYalahar.Questline, 5)
+	player:setStorageValue(Storage.InServiceofYalahar.Mission01, 6)
+	player:setStorageValue(Storage.InServiceofYalahar.Mission02, 8)
+	player:setStorageValue(Storage.InServiceofYalahar.Mission03, 6)
+	player:setStorageValue(Storage.InServiceofYalahar.Mission04, 6)
+	player:setStorageValue(Storage.InServiceofYalahar.Mission05, 8)
+	player:setStorageValue(Storage.InServiceofYalahar.Mission06, 5)
+	player:setStorageValue(Storage.InServiceofYalahar.Mission07, 5)
+	player:setStorageValue(Storage.InServiceofYalahar.Mission08, 4)
+	player:setStorageValue(Storage.InServiceofYalahar.Mission09, 2)
+	player:setStorageValue(Storage.InServiceofYalahar.Mission10, 1)
+	--WOTE
+	player:setStorageValue(Storage.WrathoftheEmperor.Questline, 1)
+	player:setStorageValue(Storage.WrathoftheEmperor.Mission01, 3)
+	player:setStorageValue(Storage.WrathoftheEmperor.Mission02, 3)
+	player:setStorageValue(Storage.WrathoftheEmperor.Mission03, 3)
+	player:setStorageValue(Storage.WrathoftheEmperor.Mission04, 3)
+	player:setStorageValue(Storage.WrathoftheEmperor.Mission05, 3)
+	player:setStorageValue(Storage.WrathoftheEmperor.Mission06, 4)
+	player:setStorageValue(Storage.WrathoftheEmperor.Mission07, 6)
+	player:setStorageValue(Storage.WrathoftheEmperor.Mission08, 2)
+	player:setStorageValue(Storage.WrathoftheEmperor.Mission09, 2)
+	player:setStorageValue(Storage.WrathoftheEmperor.Mission10, 1)
+	--Imbuiment
+	player:setStorageValue(Storage.ForgottenKnowledge.Tomes, 1)
+	player:setStorageValue(Storage.ForgottenKnowledge.LastLoreKilled, 1)    
+	player:setStorageValue(Storage.ForgottenKnowledge.TimeGuardianKilled, 1)
+	player:setStorageValue(Storage.ForgottenKnowledge.HorrorKilled, 1)
+	player:setStorageValue(Storage.ForgottenKnowledge.DragonkingKilled, 1)
+	player:setStorageValue(Storage.ForgottenKnowledge.ThornKnightKilled, 1)
+	player:setStorageValue(Storage.ForgottenKnowledge.LloydKilled, 1)
+	player:setStorageValue(Storage.ForgottenKnowledge.LadyTenebrisKilled, 1)
+	player:setStorageValue(Storage.ForgottenKnowledge.AccessMachine, 1)
+	--SearoutsYalahar
+	player:setStorageValue(Storage.SearoutesAroundYalahar.Darashia, 1)
+	player:setStorageValue(Storage.SearoutesAroundYalahar.AbDendriel, 1)
+	player:setStorageValue(Storage.SearoutesAroundYalahar.Venore, 1)
+	player:setStorageValue(Storage.SearoutesAroundYalahar.Ankrahmun, 1)
+	player:setStorageValue(Storage.SearoutesAroundYalahar.PortHope, 1)
+	player:setStorageValue(Storage.SearoutesAroundYalahar.Thais, 1)
+	player:setStorageValue(Storage.SearoutesAroundYalahar.LibertyBay, 1)
+	player:setStorageValue(Storage.SearoutesAroundYalahar.Carlin, 1)
+
+	player:sendTextMessage(MESSAGE_STATUS_DEFAULT, loginStr)
+	
+	local quests = {"What a Foolish", "War Against The Hive", "Unnatural Selection", "Tibia Tales", "The White Raven Monastery", "The Thieves Guild", "The Rookie Guard", "The Repenters", "The Queen of the Banshees", "The Ice Islands", "The Gravedigger of Drefia", "The Desert Dungeon", "The Beginning", "The Ancient Tombs", "Spike Tasks", "Secret Service", "Sea of Light", "Hot Cuisine", "Friends and Traders", "Elemental Spheres", "Adventurers Guild", "A Father's Burden", "The Shattered Isles", "The Postman Missions", "Bigfoot's Burden", "The Hidden City Of Beregar", "The Ape City", "Children Of The Revolution", "The New Frontier", "The Explorer Society", "Spirithunters Quest"}
+
+	for i, questname in pairs(quests) do
+		local quest = Game.getQuest(Game.getQuestIdByName(questname))
+		if quest and player:getStorageValue(quest.startstorageid) == -1 then
+			player:setStorageValue(quest.startstorageid, quest.startstoragevalue)
+			for m, missionvalue in pairs(quest.missions) do
+				local mission =  Game.getMission(Game.getQuestIdByName(questname), m)
+				if mission and player:getStorageValue(mission.storageid) < mission.endvalue then
+					player:setStorageValue(mission.storageid, mission.endvalue)
+				end
+			end
+		end
+	end
 
     local playerId = player:getId()
 

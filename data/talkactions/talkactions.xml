@@ -1,3 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <talkactions>
+    <talkaction words="!bless" separator="" script="BuyBless.lua"/>
+    <talkaction words="!aol" separator="" script="BuyAmuletOfLoss.lua"/>
+    <talkaction words="!autoloot" separator=" " script="AutoLoot.lua"/>
+    <talkaction words="!add" separator=" " script="AddAutoLoot.lua" />
 </talkactions>

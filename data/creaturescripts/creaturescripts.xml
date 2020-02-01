@@ -8,6 +8,9 @@
 	<event type="death" name="Servant_Death" script="mastervoice/servantDeath.lua"/>
 	<event type="death" name="Mage_Death" script="mastervoice/mageDeath.lua"/>
 
+	<!-- AUTO LOOT -->
+	<event type="modalwindow" name="autoloot" script="autoloot.lua"/>
+
 	<!-- New Summons (Pets) -->
 	<event type="login" name="petlogin" script="pet.lua" />
 	<event type="think" name="petthink" script="pet.lua" />
@@ -233,4 +236,6 @@
 	<event type="advance" name="AdvanceSave" script="others/advance_save.lua" />
 	<event type="kill" name="bonusPreyLootKill" script="preyloot.lua"/>
 	<event type="death" name="bonusPreyLootDeath" script="preyloot.lua" />
+	<event type="death" name="bonusPreyLootDeath" script="preyloot.lua" />
+	<event type="advance" name="LevelReward" script="others/LevelReward.lua" />
 </creaturescripts>

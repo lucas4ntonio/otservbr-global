@@ -1,4 +1,4 @@
-local freeBlessMaxLevel = 20
+local freeBlessMaxLevel = 130
 
 function onLogin(cid)
     local player = Player(cid)
@@ -9,7 +9,7 @@ function onLogin(cid)
     		end
     	end
 
-    	player:sendTextMessage(MESSAGE_EVENT_ADVANCE,'You received adventurers blessings for you to be level less than ' .. freeBlessMaxLevel .. '!')
+    	player:sendTextMessage(MESSAGE_EVENT_ADVANCE,'You have free blesses until you get level ' .. freeBlessMaxLevel .. '.')
         player:getPosition():sendMagicEffect(CONST_ME_HOLYDAMAGE)
     end
     return true
